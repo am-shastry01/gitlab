@@ -1,1 +1,3 @@
-# This is the MAIN branch version
+# First lab assignment
+
+## Update: Added a new feature section
