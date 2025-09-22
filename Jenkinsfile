@@ -1,20 +1,23 @@
-pipeline{
-  agent any
-  stages{
-    stage("build"){
-      steps{
-        echo 'building the application...'
-      }
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/am-shastry01/gitlab.git', branch: 'main'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh 'echo "Running Declarative Pipeline from GitHub"'
+            }
+        }
     }
-    stage("test"){
-      steps{
-        echo 'testing the application...'
-      }
+
+    post {
+        success {
+            echo 'Finished: SUCCESS'
+        }
     }
-    stage("deploy"){
-      steps{
-        echo 'deploying the application...'
-      }
-    }
-  }
 }
