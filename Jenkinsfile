@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "amshastry01/flask-hello"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,16 +12,12 @@ pipeline {
             }
         }
 
-        stage('Run') {
+        stage('Build Docker Image') {
             steps {
-                sh 'echo "Running Declarative Pipeline from GitHub"'
+                script {
+                    sh "docker build -t ${IMAGE_NAME}:latest ."
+                }
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Finished: SUCCESS'
         }
     }
 }
